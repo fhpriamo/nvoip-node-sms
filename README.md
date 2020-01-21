@@ -74,20 +74,20 @@ Its also possible to run it without installation using npx.
 
 ## API
 
-### Function `createClient(config)`
+### `createClient(config)`
 
 Creates a client for sending messages.
 
 #### Parameters:
 
-- config \<<Object>> a configuration object:
-  - authToken <<String>> the authentication token.
-  - [url] \<<String>> the API endpoint.
-  - [request] \<<Function>> custom request function. (see the request module for more details).
+- config Object» a configuration object:
+  - authToken «String» the authentication token.
+  - \[url] «String» the API endpoint.
+  - \[request] «Function» custom request function. (see the request module for more details).
 
 #### Returns
 
-A SMS client \<<SmsClient>>.
+A SMS client «SmsClient».
 
 #### Example
 
@@ -100,20 +100,20 @@ const client = createClient({
 
 ~~~
 
-### Method `SmsClient.prototype.sendSms(phoneNumber, textMessage)`
+### `SmsClient.prototype.sendSms(phoneNumber, textMessage)`
 
-- phoneNumber \<<String> a phone number containing nothing but digits.
-- textMessage \<<String>> the message to be sent.
+- phoneNumber «String» a phone number containing nothing but digits.
+- textMessage «String» the message to be sent.
 
 #### Returns
 
-A promise \<<Promise>> containing the API response data.
+A promise «Promise» containing the API response data.
 
 #### Throws
 
-- \<<MessageValidationError>> if the textMessage is invalid.
-- \<<PhoneNumberValidationError>> if the phoneNumber is invalid.
-- \<<HttpRequestError>> if the HTTP request failed.
+- «MessageValidationError» if the textMessage is invalid.
+- «PhoneNumberValidationError» if the phoneNumber is invalid.
+- «HttpRequestError» if the HTTP request failed.
 
 #### Example
 
@@ -134,11 +134,11 @@ A collection of errors are provided in order to enable proper error handling and
 
 Error hierarchy:
 
-- SmsClientError,
-  - HttpRequestError,
-  - ValidationError,
-    - PhoneNumberValidationError,
-    - MessageValidationError,
+- «SmsClientError»
+  - «HttpRequestError»
+  - «ValidationError»
+    - «PhoneNumberValidationError»
+    - «MessageValidationError»
 
 Check the errors module for more details.
 
