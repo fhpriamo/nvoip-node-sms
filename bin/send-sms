@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const nvoipSms = require('../src');
+
+const NVOIP_API_TOKEN = process.env.NVOIP_API_TOKEN;
+
+program.version('1.0.0');
+
+program.option('-a, --auth-token <token>', 'API athentication token.');
+program.option('-u, --url <url>', 'API url.');
+program.option('-e, --error', 'Display detailed error information.');
+program.option('-t, --timeout <miliseconds>', 'HTTP request timeout (in miliseconds).', 5000);
+program.requiredOption('-m, --message <message>', 'Message to be sent.');
+program.requiredOption('-n, --number <number>', 'Phone number.');
+
+program.parse(process.argv);
+
+const config = {
+  request: nvoipSms.createRequest({ timeout: program.timeout }),
+};
+
+if (program.authToken === undefined && NVOIP_API_TOKEN === undefined) {
+  console.error(
+    'error: API token not specified.',
+    'Use the -a, --auth-token <token> option ',
+    'or set the NVOIP_API_TOKEN env variable.'
+  );
+  process.exit(1);
+}
+
+config.authToken = program.authToken ? program.authToken : NVOIP_API_TOKEN;
+
+if (program.url) config.url = program.url;
+
+const detailError = program.error;
+const message = program.message;
+const number = program.number;
+
+const client = nvoipSms.createClient(config);
+
+client.sendSms(number, message)
+  .then(data => console.log(data))
+  .catch(err => {
+    detailError ? console.error(err) : console.error(err.message);
+    process.exit(1);
+  });
