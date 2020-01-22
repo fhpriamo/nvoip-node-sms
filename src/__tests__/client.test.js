@@ -1,13 +1,12 @@
 const { PhoneNumber, Message, SmsClient } = require('../client');
+const { TEXT_160_CHARS, TEXT_161_CHARS } = require('./fixtures');
 const {
   PhoneNumberValidationError,
   MessageValidationError,
   HttpRequestError,
 } = require('../errors');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
+beforeEach(() => jest.clearAllMocks());
 
 describe('client', () => {
 
@@ -60,7 +59,7 @@ describe('client', () => {
 
     it.each`
       validMessage
-      ${'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789'},
+      ${TEXT_160_CHARS},
       ${'Oi, Joao!\n\rQuer ficar milhonario???'},
       ${'Que a forca esteja com voce!'},
       ${'Codigo de verificacao: 523532\n(Valido ate 25-11-2019)'},
@@ -79,13 +78,15 @@ describe('client', () => {
       }));
     });
 
-    it('rejects a message that exceeds 140 characters.', () => {
-      const tooLongText = '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789X'
+    it('rejects a message that exceeds 160 characters.', () => {
+      
+      expect.assertions(3);
 
-      expect.assertions(2);
+      // Sanity check.
+      expect(TEXT_161_CHARS.length).toBe(161);
 
       try {
-        new Message(tooLongText);
+        new Message(TEXT_161_CHARS);
       } catch (err) {
         expect(err).toBeInstanceOf(MessageValidationError);
         expect(err.code).toBe('MESSAGE_TOO_LONG_ERR');

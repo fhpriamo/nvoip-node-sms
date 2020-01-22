@@ -18,7 +18,7 @@ class Message {
   }
 
   _validate(messageStr) {
-    if (messageStr.length > 140) {
+    if (messageStr.length > 160) {
       throw new MessageValidationError(
         'Message overseeds the maximum of 140 characters',
         'MESSAGE_TOO_LONG_ERR',
