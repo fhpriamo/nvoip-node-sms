@@ -1,7 +1,7 @@
 {
   "name": "nvoip-node-sms",
   "description": "Send SMS messages in node via Nvoip SMS API.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "src/index.js",
   "license": "MIT",
   "author": "Fábio Priamo (https://github.com/fhpriamo)",
@@ -10,8 +10,12 @@
     "url" : "https://github.com/fhpriamo/nvoip-node-sms.git"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns=\"/(integration|e2e)/.*\"",
+    "test-integrations": "jest", 
     "send-sms": "node ./bin/send-sms"
+  },
+  "jest": {
+    "testRegex": "/__tests__/.*\\.(test|spec)\\.m?js$"
   },
   "bin": {
     "send-sms": "./bin/send-sms"
