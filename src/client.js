@@ -6,10 +6,6 @@ const {
 
 const phoneNumberRegex = new RegExp(`^[0-9]+\$`);
 
-const messageRegex = new RegExp(
-  `^[\-@_!$"#%&'()*:+;,<=>./?\\s\\n\\rA-Za-z0-9]+\$`
-);
-
 class Message {
 
   get size() {
@@ -22,14 +18,6 @@ class Message {
   }
 
   _validate(messageStr) {
-    if (!messageRegex.test(messageStr)) {
-      throw new MessageValidationError(
-        'Message contains one or more invalid characters',
-        'MESSAGE_CONTAINS_INVALID_CHARACTERS_ERR',
-        { invalidMessage: messageStr }
-      );
-    }
-
     if (messageStr.length > 140) {
       throw new MessageValidationError(
         'Message overseeds the maximum of 140 characters',

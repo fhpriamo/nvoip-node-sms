@@ -59,25 +59,6 @@ describe('client', () => {
   describe('Message', () => {
 
     it.each`
-      invalidMessage
-      ${'['},
-      ${']'},
-      ${'á'},
-      ${'♡'},
-      ${'~'},
-      ${'ç'},
-      `('rejects message texts with forbidden characters.', ({ invalidMessage }) => {
-      expect.assertions(2);
-
-      try {
-        new Message(invalidMessage);
-      } catch (err) {
-        expect(err).toBeInstanceOf(MessageValidationError);
-        expect(err.code).toBe('MESSAGE_CONTAINS_INVALID_CHARACTERS_ERR');
-      }
-    });
-
-    it.each`
       validMessage
       ${'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789'},
       ${'Oi, Joao!\n\rQuer ficar milhonario???'},
