@@ -1,3 +1,5 @@
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest) [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
+
 # nvoip-node-sms
 
 Send SMS messages in node via Nvoip SMS API.
